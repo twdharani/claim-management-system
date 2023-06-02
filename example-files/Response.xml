@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GetPolicyDetailsResponse xmlns="http://allstate.com/claim" >
+    <PolicyDetails>
+        <PolicyNumber>1</PolicyNumber>
+        <HolderName>Anshu</HolderName>
+        <CoverageLimit>400000</CoverageLimit>
+    </PolicyDetails>
+</GetPolicyDetailsResponse>
