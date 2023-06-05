@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GetPolicyDetailsResponse xmlns="http://allstate.com/claim" >
     <PolicyDetails>
-        <PolicyNumber>1</PolicyNumber>
         <HolderName>Anshu</HolderName>
+        <PolicyNumber>1</PolicyNumber>
+        <CoverageName>Health</CoverageName>
         <CoverageLimit>400000</CoverageLimit>
+        <Deductible>20000</Deductible>
     </PolicyDetails>
 </GetPolicyDetailsResponse>

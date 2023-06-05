@@ -1,4 +1,4 @@
-package com.allstate.Claimmanagementsystem;
+package com.allstate.soapclaimwebservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
