@@ -2,6 +2,7 @@ package com.allstate.soapclaimwebservice.service;
 
 import com.allstate.soapclaimwebservice.bean.Claim;
 import com.allstate.soapclaimwebservice.bean.Policy;
+import com.allstate.soapclaimwebservice.exception.PolicyNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Component
 public class PolicyDetailsService {
+
 
     private static List<Policy> policyDetailsList = new ArrayList<>();
     private static List<Claim> claimList = new ArrayList<>();
@@ -27,15 +29,18 @@ public class PolicyDetailsService {
         claimList.add(claim2);
     }
 
-    public Policy findByClaimNumber(int claimNumber) {
+    public Policy findByClaimNumber(int claimNumber) throws PolicyNotFoundException {
+        Policy policy = null;
         for (Claim claim : claimList) {
             if (claim.getClaimNumber() == claimNumber) {
                 int policyNumber = claim.getPolicyNumber();
-                return getPolicyDetails(policyNumber);
+                policy = getPolicyDetails(policyNumber);
             }
         }
-        return null;
+        if (policy == null)
+            throw new PolicyNotFoundException("Claim Number does not exist " + claimNumber);
 
+        return policy;
     }
 
     private Policy getPolicyDetails(int policyNumber) {
