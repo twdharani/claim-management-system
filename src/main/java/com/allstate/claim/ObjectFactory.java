@@ -54,9 +54,8 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PolicyDetails }
-     * 
      */
-    public PolicyDetails createPolicyDetails() {
+    public PolicyDetails createPolicyDetails(Integer claimNumber) {
         return new PolicyDetails();
     }
 
