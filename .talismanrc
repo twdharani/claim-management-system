@@ -1,4 +1,7 @@
 fileignoreconfig:
 - filename: mvnw
   checksum: 9a0e968807e91279b4856750466e5aab9eeac7305e4ec8463979cb7cb0525f67
+- filename: src/main/java/com/allstate/soapclaimwebservice/WebServiceConfig.java
+  checksum: e6e1415120b6adcbb635ebfbc9221950064c2de19eb43fe073c0935b1bb9a075
 version: ""
+
