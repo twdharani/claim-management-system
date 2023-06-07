@@ -3,6 +3,8 @@ package com.allstate.soapclaimwebservice.service;
 import com.allstate.soapclaimwebservice.bean.Claim;
 import com.allstate.soapclaimwebservice.bean.Policy;
 import com.allstate.soapclaimwebservice.exception.PolicyNotFoundException;
+import com.allstate.soapclaimwebservice.sender.MessageSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ import java.util.List;
 @Component
 public class PolicyDetailsService {
 
+    @Autowired
+    public MessageSender sender;
 
     private static List<Policy> policyDetailsList = new ArrayList<>();
     private static List<Claim> claimList = new ArrayList<>();
@@ -40,6 +44,7 @@ public class PolicyDetailsService {
         if (policy == null)
             throw new PolicyNotFoundException("Claim Number does not exist " + claimNumber);
 
+        sender.sendPolicyDetails(policy);
         return policy;
     }
 
