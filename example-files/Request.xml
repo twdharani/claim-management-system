@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<GetPolicyDetailsRequest xmlns="http://allstate.com/claim" >
+<GetPolicyDetailsRequest xmlns="http://allstate.com/soapclaimwebservice/model">
     <ClaimNumber>123</ClaimNumber>
 </GetPolicyDetailsRequest>

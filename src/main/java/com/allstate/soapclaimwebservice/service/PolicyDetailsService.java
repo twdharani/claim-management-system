@@ -15,6 +15,9 @@ import static com.allstate.soapclaimwebservice.constants.Constants.CLAIM_NUMBER_
 @Component
 public class PolicyDetailsService {
 
+    private static List<Policy> policyDetailsList = new ArrayList<>();
+    private static List<Claim> claimList = new ArrayList<>();
+
     static {
         Policy policyDetails1 = new Policy("HolderOne", 123456789, "Health", 20000, 2000);
         policyDetailsList.add(policyDetails1);
@@ -29,8 +32,6 @@ public class PolicyDetailsService {
         claimList.add(claim2);
     }
 
-    private static List<Policy> policyDetailsList = new ArrayList<>();
-    private static List<Claim> claimList = new ArrayList<>();
 
     @Autowired
     public PolicyDetailsSender policyDetailsSender;

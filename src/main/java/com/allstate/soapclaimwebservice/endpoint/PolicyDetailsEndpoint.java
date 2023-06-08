@@ -1,10 +1,11 @@
 package com.allstate.soapclaimwebservice.endpoint;
 
-import com.allstate.claim.GetPolicyDetailsRequest;
-import com.allstate.claim.GetPolicyDetailsResponse;
-import com.allstate.claim.PolicyDetails;
+
 import com.allstate.soapclaimwebservice.bean.Policy;
 import com.allstate.soapclaimwebservice.exception.InvalidClaimNumberException;
+import com.allstate.soapclaimwebservice.model.GetPolicyDetailsRequest;
+import com.allstate.soapclaimwebservice.model.GetPolicyDetailsResponse;
+import com.allstate.soapclaimwebservice.model.PolicyDetails;
 import com.allstate.soapclaimwebservice.service.PolicyDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -26,7 +27,7 @@ public class PolicyDetailsEndpoint {
         }
     }
 
-    @PayloadRoot(namespace = "http://allstate.com/claim", localPart = "GetPolicyDetailsRequest")
+    @PayloadRoot(namespace = "http://allstate.com/soapclaimwebservice/model", localPart = "GetPolicyDetailsRequest")
     @ResponsePayload
     public GetPolicyDetailsResponse getPolicyDetails(@RequestPayload GetPolicyDetailsRequest request) throws InvalidClaimNumberException {
         validateClaimNumber(request);
