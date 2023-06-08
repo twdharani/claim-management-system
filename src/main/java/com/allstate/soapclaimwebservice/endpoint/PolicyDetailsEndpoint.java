@@ -12,6 +12,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import static com.allstate.soapclaimwebservice.constants.Constants.INVALID_CLAIM_NUMBER_ERROR_MESSAGE;
+
 @Endpoint
 public class PolicyDetailsEndpoint {
 
@@ -20,29 +22,30 @@ public class PolicyDetailsEndpoint {
 
     private static void validateClaimNumber(GetPolicyDetailsRequest request) {
         if (request.getClaimNumber() == 0) {
-            throw new InvalidClaimNumberException("Invalid Claim Number: please provide valid number");
+            throw new InvalidClaimNumberException(INVALID_CLAIM_NUMBER_ERROR_MESSAGE);
         }
     }
 
     @PayloadRoot(namespace = "http://allstate.com/claim", localPart = "GetPolicyDetailsRequest")
     @ResponsePayload
-    public GetPolicyDetailsResponse processPolicyDetailsRequest(@RequestPayload GetPolicyDetailsRequest request) throws InvalidClaimNumberException {
+    public GetPolicyDetailsResponse getPolicyDetails(@RequestPayload GetPolicyDetailsRequest request) throws InvalidClaimNumberException {
         validateClaimNumber(request);
         Policy policy = service.findByClaimNumber(request.getClaimNumber());
 
-        return mapPolicyDetails(policy);
+        return convertToPolicyDetails(policy);
     }
 
-    private GetPolicyDetailsResponse mapPolicyDetails(Policy policy) {
+    private GetPolicyDetailsResponse convertToPolicyDetails(Policy policy) {
         GetPolicyDetailsResponse response = new GetPolicyDetailsResponse();
-        response.setPolicyDetails(mapPolicy(policy));
+        PolicyDetails policyDetails = setXmlPolicyDetails(policy);
+        response.setPolicyDetails(policyDetails);
         return response;
     }
-    private PolicyDetails mapPolicy(Policy policy) {
+
+    private PolicyDetails setXmlPolicyDetails(Policy policy) {
         PolicyDetails details = new PolicyDetails();
 
         details.setPolicyNumber(policy.getPolicyNumber());
-
         details.setCoverageLimit(policy.getCoverageLimit());
         details.setHolderName(policy.getHolderName());
         details.setDeductible(policy.getDeductible());
