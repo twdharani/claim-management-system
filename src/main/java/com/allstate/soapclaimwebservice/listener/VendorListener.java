@@ -26,6 +26,10 @@ public class VendorListener {
     @Autowired
     private ResponseSender responseSender;
 
+    public VendorListener(ResponseSender responseSender) {
+        this.responseSender = responseSender;
+    }
+
     @JmsListener(destination = "${springjms.policyDetailsQueue}")
     public void receiveAndHandlePolicyDetails(String xmlPolicyDetails) throws ParserConfigurationException, IOException, SAXException {
         String policyNumber = getPolicyNumber(xmlPolicyDetails);
