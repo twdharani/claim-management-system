@@ -14,9 +14,11 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import static com.allstate.soapclaimwebservice.constants.Constants.INVALID_CLAIM_NUMBER_ERROR_MESSAGE;
+import static com.allstate.soapclaimwebservice.constants.Constants.NAMESPACE_URI;
 
 @Endpoint
 public class PolicyDetailsEndpoint {
+
 
     @Autowired
     PolicyDetailsService service;
@@ -27,7 +29,7 @@ public class PolicyDetailsEndpoint {
         }
     }
 
-    @PayloadRoot(namespace = "http://allstate.com/soapclaimwebservice/model", localPart = "GetPolicyDetailsRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetPolicyDetailsRequest")
     @ResponsePayload
     public GetPolicyDetailsResponse getPolicyDetails(@RequestPayload GetPolicyDetailsRequest request) throws InvalidClaimNumberException {
         validateClaimNumber(request);

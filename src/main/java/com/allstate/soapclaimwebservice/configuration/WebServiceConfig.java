@@ -12,6 +12,8 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+import static com.allstate.soapclaimwebservice.constants.Constants.NAMESPACE_URI;
+
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter{
@@ -24,11 +26,11 @@ public class WebServiceConfig extends WsConfigurerAdapter{
         return new ServletRegistrationBean<>(messageDispatcherServlet, "/ws/*");
     }
 
-    @Bean(name = "claim")
+    @Bean(name = "policy")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema claimSchema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setPortTypeName("ClaimPort");
-        definition.setTargetNamespace("http://allstate.com/claim");
+        definition.setTargetNamespace(NAMESPACE_URI);
         definition.setLocationUri("/ws");
         definition.setSchema(claimSchema);
         return definition;
